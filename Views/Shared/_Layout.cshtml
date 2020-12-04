@@ -1,0 +1,60 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="İbrahim Sipahi">
+    <title>@ViewBag.Title</title>
+
+    <link rel="canonical" href="http://www.ibrahimsipahi.com">
+    <link rel="shortcut icon" href="~/fonts/com.png" type="image/x-icon" />
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+      @*@media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }*@
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/Content/css.css" rel="stylesheet" />
+    <!-- Custom styles for this template -->
+    <link href="~/Content/blog.css" rel="stylesheet" />
+
+
+    @*<link href="~/Content/social.css" rel="stylesheet" />
+    <link href="~/Content/social_icon.css" rel="stylesheet" />
+    <script src="~/Content/social.js"></script>*@
+</head>
+
+<body>
+
+
+    @Html.Partial("_Header")
+
+    @RenderBody()
+
+    @Html.Partial("_Footer")
+
+
+</body>
+</html>
