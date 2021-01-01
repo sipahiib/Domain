@@ -1,4 +1,6 @@
 ﻿
+@model IbrahimSipahi.UI.Models.MailModels
+
 @{
     ViewBag.Title = "İletişim";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,32 +12,44 @@
 
 
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-<link href="~/Content/css.css" rel="stylesheet" />
+@*<link href="~/Content/css.css" rel="stylesheet" />*@
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
 
+@using (Html.BeginForm("Contact", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "contact-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
 
-<div class="container">
-    <div class="aboutus-section">
-
-        <div class="row">
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class="aboutus">
-                    <address>
-                        <strong>Mesaj formu eklenecektir. Şimdilik görüşleriniz için lütfen </strong>
-                        <a href="mailto:info@ibrahimsipahi.com">Buraya Tıklayın</a><br />
-                    </address>
-                </div>
+    <form>
+        <div class="p-4">
+            <div class="form-group col-md-6">
+                <label class="email">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Mail adresiniz *", @type = "email" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </label>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="message">
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control", cols = 22, @placeholder = "Mesaj *" })
+                    @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
+                </label>
+            </div>
+            <div class="form-group col-md-6">
+                <button type="submit" class="btn btn-success">Gönder</button>
+                <p class="p-0 text-muted">@ViewBag.Mail</p>
             </div>
         </div>
-        <div class="p-4">
-            <h4 class="font-italic">Hesaplarım</h4>
-            <a href="https://www.linkedin.com/in/sipahiib/"><img src="~/fonts/linkedin.png" width="50" height="30" /></a>
-            <a href="https://github.com/sipahiib"><img src="~/fonts/github.png" width="30" height="30" /></a>
-            <a href="https://twitter.com/sipahisipahiib/"><img src="~/fonts/twitter.png" width="30" height="30" /></a>
-            <a href="https://www.instagram.com/sipahiib/"><img src="~/fonts/insta.jpeg" width="50" height="30" /></a>
-        </div>
-    </div>
-    
+    </form>
+}
 
+
+<div class="p-4">
+    <h4 class="font-italic">Hesaplarım</h4>
+    <a href="https://www.linkedin.com/in/sipahiib/"><img src="~/fonts/linkedin.png" width="50" height="30" /></a>
+    <a href="https://github.com/sipahiib"><img src="~/fonts/github.png" width="30" height="30" /></a>
+    <a href="https://twitter.com/sipahisipahiib/"><img src="~/fonts/twitter.png" width="30" height="30" /></a>
+    <a href="https://www.instagram.com/sipahiib/"><img src="~/fonts/insta.jpeg" width="50" height="30" /></a>
 </div>
+
+
 
