@@ -23,19 +23,11 @@
 
 <body>
 
-
-
-    @Html.AntiForgeryToken()
-
-    @Html.Partial("_Header")
-
-
     <div class="container">
+        @Html.Partial("_Header")
+
         @RenderBody()
     </div>
-
-    @*@Html.Partial("_Footer")*@
-
 
 </body>
 </html>
