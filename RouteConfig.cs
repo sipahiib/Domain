@@ -26,6 +26,13 @@ namespace IbrahimSipahi.UI
             );
 
             routes.MapRoute(
+                name: "Login",
+                url: "giris",
+                defaults: new { controller = "Security", action = "Login" }
+            );
+
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
