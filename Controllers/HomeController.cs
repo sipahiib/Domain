@@ -16,27 +16,6 @@ namespace IbrahimSipahi.UI.Controllers
     {
         public ActionResult Index()
         {
-            //if (Session["login"] == null)
-            //{
-            //    string userIP = Request.ServerVariables["HTTP_CLIENT_IP"] == null ? Request.UserHostAddress : Request.ServerVariables["HTTP_CLIENT_IP"];                
-
-            //    sipahiibEntities sipahiibEntity = new sipahiibEntities();
-
-            //    //if (!(sipahiibEntity.IPAddress.ToList().Where(x => x.IPAddress1 == userIP).Select(y => y.IPAddress1).Any()))
-            //    //{
-            //    //    ViewBag.Mesaj = "İlk kez bu siteye giriş yapıyorsun. Teşekkürler!";
-            //    //}
-            //    //else
-            //    //{
-            //    //    ViewBag.Mesaj = "Tekrar hoşgeldin!";
-            //    //}
-
-            //    Session["login"] = 1;
-
-            //    sipahiibEntity.IPAddress.Add(new Models.IPAddress { IPAddress1 = userIP, CreateDate = DateTime.Now });
-            //    sipahiibEntity.SaveChanges();
-            //}
-
             var followups = new List<Followups>()
             {
                 new Followups() { Name= "Tim Corey", Link="https://www.youtube.com/user/IAmTimCorey"} ,
@@ -115,7 +94,7 @@ namespace IbrahimSipahi.UI.Controllers
                 {
                     smtpClient.EnableSsl = false;
                     smtpClient.UseDefaultCredentials = false;
-                    NetworkCredential cred = new NetworkCredential("info@ibrahimsipahi.com", "4XuRF3K1");
+                    NetworkCredential cred = new NetworkCredential("username", "pass");
                     cred.Domain = "info@ibrahimsipahi.com";
                     smtpClient.Credentials = cred;
 
