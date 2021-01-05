@@ -112,11 +112,11 @@ namespace PersonelMVCUI.Controllers
         {
             try
             {
-                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", 587))
+                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", port))
                 {
                     smtpClient.EnableSsl = false;
                     smtpClient.UseDefaultCredentials = false;
-                    NetworkCredential cred = new NetworkCredential("info@ibrahimsipahi.com", "4XuRF3K1");
+                    NetworkCredential cred = new NetworkCredential("username", "pass");
                     cred.Domain = "info@ibrahimsipahi.com";
                     smtpClient.Credentials = cred;
 
