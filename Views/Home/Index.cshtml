@@ -1,4 +1,5 @@
-﻿@model List<IbrahimSipahi.UI.Models.IPAddress>
+﻿@*@model List<IbrahimSipahi.UI.Models.IPAddress>*@
+@model IbrahimSipahi.UI.ViewModels.ViewModels
 
 @{
     ViewBag.Title = "İbrahim Sipahi - Kişisel Blog Sayfası";
@@ -9,7 +10,7 @@
 <div class="container">
     <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
         <div class="col-md-6 px-0">
-            <h1 class="display-4 font-italic">Test Yayını devam ediyor</h1>
+            <h1 class="display-6 font-italic">Test Yayını devam ediyor</h1>
             <p class="lead my-auto">
                 Web geliştirmelerini bu sayfadan yayınlayacağım.
             </p>
@@ -63,32 +64,6 @@
 
                     <p>Bilgisayar Mühendisiyim. </p>
                     <hr>
-                    @*<p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-                        <blockquote>
-                            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        </blockquote>
-                        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>*@
-
-                    @*<h2>Heading</h2>
-                        <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                        <h3>Sub-heading</h3>
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                        <pre><code>Example code block</code></pre>
-                        <p>Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-                        <h3>Sub-heading</h3>
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                        <ul>
-                            <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
-                            <li>Donec id elit non mi porta gravida at eget metus.</li>
-                            <li>Nulla vitae elit libero, a pharetra augue.</li>
-                        </ul>
-                        <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
-                        <ol>
-                            <li>Vestibulum id ligula porta felis euismod semper.</li>
-                            <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-                            <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
-                        </ol>
-                        <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>*@
                 </div><!-- /.blog-post -->
 
                 <div class="blog-post">
@@ -97,10 +72,10 @@
 
                     <p>Deneme</p>
                     @*<blockquote>
-                            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. </p>
                         </blockquote>
-                        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-                        <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+                        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. </p>
+                        <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus</p>
                     *@
                 </div><!-- /.blog-post -->
 
@@ -115,37 +90,20 @@
             <aside class="col-md-4 blog-sidebar">
                 <div class="p-4 mb-3 bg-light rounded">
                     <h4 class="font-italic">Takip Edebilirsin</h4>
-                    <a href="https://www.youtube.com/user/IAmTimCorey"> <p class="mb-0"><em>Tim Corey</em> </p></a>
-                    <a href="https://www.youtube.com/channel/UCEQB9Atxfn5AJgX6KfwvTyA"> <p class="mb-0"><em>Bora Kaşmer</em> </p></a>
-                    <a href="https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw"> <p class="mb-0"><em>dotNET</em> </p></a>
-                    <a href="https://www.youtube.com/channel/UCTdw38Cw6jcm0atBPA39a0Q"> <p class="mb-0"><em>NDC Conferences</em> </p></a>
-                    <a href="https://www.youtube.com/channel/UCv6jcPwFujuTIwFQ11jt1Yw"> <p class="mb-0"><em>Barış Özcan</em> </p></a>
-                    <a href="https://twitter.com/ProfDemirtas"> <p class="mb-0"><em>Özgür Demirtaş</em> </p></a>
-                    <a href="https://twitter.com/ecapa_aklinizi"> <p class="mb-0"><em>Emin Çapa</em> </p></a>
+                    @foreach (var item in Model.Followups)
+                    {
+                        <a href="@item.Link"> <p class="mb-0"><em>@item.Name</em> </p></a>
+                    }
                 </div>
-
-                @*<div class="p-4">
-                    <h4 class="font-italic">Hesaplarım</h4>
-                    <a href="https://www.linkedin.com/in/sipahiib/"><img src="~/fonts/linkedin.png" width="50" height="30" /></a>
-                    <a href="https://github.com/sipahiib"><img src="~/fonts/github.png" width="30" height="30" /></a>
-                    <a href="https://twitter.com/sipahisipahiib/"><img src="~/fonts/twitter.png" width="30" height="30" /></a>
-                    <a href="https://www.instagram.com/sipahiib/"><img src="~/fonts/insta.jpeg" width="50" height="30" /></a>
-                </div>*@
 
 
                 <div class="p-4">
                     <h4 class="font-italic">Eğitim Linkleri</h4>
                     <ol class="list-unstyled mb-0">
-                        <li><a href="https://www.medium.com/">Medium</a></li>
-                        <li><a href="https://www.coursera.org/learn/machine-learning">Machine Learning</a></li>
-                        <li><a href="https://www.edx.org/">edX-Online Course</a></li>
-                        <li><a href="https://edabit.com">Edabit</a></li>
-                        <li><a href="https://hackerrank.com">Hackerrank</a></li>
-                        <li><a href="https://www.youtube.com/watch?v=ulg2dpPkulw&list=PLUbFnGajtZlX9ubiLzYz_cw92esraiIBi&index=1">Flutter</a></li>
-                        <li><a href="https://microservices.io/">Microservices</a></li>
-                        <li><a href="https://www.techiedelight.com/">Techie Delight</a></li>
-                        <li><a href="https://www.geeksforgeeks.org/">Geeks for Geeks</a></li>
-                        <li><a href="https://www.mobilhanem.com/">Mobilhanem</a></li>
+                        @foreach (var item in Model.Educations)
+                        {
+                            <li><a href="@item.Link">@item.Name</a></li>
+                        }
                     </ol>
                 </div>
 

@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
 <html>
 <head>
@@ -32,11 +31,12 @@
             @Html.PasswordFor(m => m.Sifre, new { @class = "form-control", placeholder = "Şifrenizi giriniz" })
             @Html.ValidationMessageFor(m => m.Sifre, "", new { @class = "text-danger" })
         </div>
-        @*<div class="form-group">
-                @Html.PasswordFor(m => m.OnaySifre, new { @class = "form-control", placeholder = "Şifrenizi tekrar giriniz" })
-                @Html.ValidationMessageFor(m => m.OnaySifre, "", new { @class = "text-danger" })
-            </div>*@
+
         <button type="submit" class="btn btn-block btn-success">Giriş Yap</button>
+
     }
+    <br />
+        @Html.ActionLink("Şifremi Unuttum", "PasswordRemember", "Security", new { area = "" }, new { @class = "btn btn-sm btn-outline-danger " })
+
     </body>
 </html>
