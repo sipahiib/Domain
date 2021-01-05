@@ -1,6 +1,7 @@
 ﻿
 using IbrahimSipahi.UI.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -13,27 +14,62 @@ namespace IbrahimSipahi.UI.Controllers
 {
     public class HomeController : Controller
     {
-        sipahiibEntities sipahiibEntity = new sipahiibEntities();
-
         public ActionResult Index()
         {
-            string userIP = Request.ServerVariables["HTTP_CLIENT_IP"] == null ? Request.UserHostAddress : Request.ServerVariables["HTTP_CLIENT_IP"];
-
-            //if (!(sipahiibEntity.IPAddress.ToList().Where(x => x.IPAddress1 == userIP).Select(y => y.IPAddress1).Any()))
+            //if (Session["login"] == null)
             //{
-            //    ViewBag.Mesaj = "İlk kez bu siteye giriş yapıyorsun. Teşekkürler!";
-            //}
-            //else
-            //{
-            //    ViewBag.Mesaj = "Tekrar hoşgeldin!";
+            //    string userIP = Request.ServerVariables["HTTP_CLIENT_IP"] == null ? Request.UserHostAddress : Request.ServerVariables["HTTP_CLIENT_IP"];                
+
+            //    sipahiibEntities sipahiibEntity = new sipahiibEntities();
+
+            //    //if (!(sipahiibEntity.IPAddress.ToList().Where(x => x.IPAddress1 == userIP).Select(y => y.IPAddress1).Any()))
+            //    //{
+            //    //    ViewBag.Mesaj = "İlk kez bu siteye giriş yapıyorsun. Teşekkürler!";
+            //    //}
+            //    //else
+            //    //{
+            //    //    ViewBag.Mesaj = "Tekrar hoşgeldin!";
+            //    //}
+
+            //    Session["login"] = 1;
+
+            //    sipahiibEntity.IPAddress.Add(new Models.IPAddress { IPAddress1 = userIP, CreateDate = DateTime.Now });
+            //    sipahiibEntity.SaveChanges();
             //}
 
-            sipahiibEntity.IPAddress.Add(new Models.IPAddress { IPAddress1 = userIP, CreateDate = DateTime.Now });
-            sipahiibEntity.SaveChanges();
+            var followups = new List<Followups>()
+            {
+                new Followups() { Name= "Tim Corey", Link="https://www.youtube.com/user/IAmTimCorey"} ,
+                new Followups() { Name= "Bora Kaşmer", Link="https://www.youtube.com/channel/UCEQB9Atxfn5AJgX6KfwvTyA"} ,
+                new Followups() { Name= "dotNET", Link="https://www.youtube.com/channel/UCvtT19MZW8dq5Wwfu6B0oxw"},
+                new Followups() { Name= "NDC Conferences", Link="https://www.youtube.com/channel/UCTdw38Cw6jcm0atBPA39a0Q"},
+                new Followups() { Name= "Barış Özcan", Link="https://www.youtube.com/channel/UCv6jcPwFujuTIwFQ11jt1Yw"},
+                new Followups() { Name= "Özgür Demirtaş", Link="https://twitter.com/ProfDemirtas"},
+                new Followups() { Name= "Emin Çapa", Link="https://twitter.com/ecapa_aklinizi"}
+            };
 
-            return View();
+            var educations = new List<Education>()
+            {
+                new Education() { Name="Medium" , Link="https://www.medium.com/"},
+                new Education() { Name="Machine Learning" , Link="https://www.coursera.org/learn/machine-learning"},
+                new Education() { Name="edX-Online Course" , Link="https://www.edx.org/"},
+                new Education() { Name="Edabit" , Link="https://edabit.com"},
+                new Education() { Name="Hackerrank" , Link="https://hackerrank.com"},
+                new Education() { Name="Flutter" , Link="https://www.youtube.com/watch?v=ulg2dpPkulw&list=PLUbFnGajtZlX9ubiLzYz_cw92esraiIBi&index=1"},
+                new Education() { Name="Microservices" , Link="https://microservices.io/"},
+                new Education() { Name="Techie Delight" , Link="https://www.techiedelight.com/"},
+                new Education() { Name="Geeks for Geeks" , Link="https://www.geeksforgeeks.org/"},
+                new Education() { Name="Mobilhanem" , Link="https://www.mobilhanem.com/"}
+            };
+
+            var model = new ViewModels.ViewModels()
+            {
+                Followups = followups,
+                Educations = educations
+            };
+
+            return View(model);
         }
-
 
         public ActionResult About()
         {
@@ -63,8 +99,8 @@ namespace IbrahimSipahi.UI.Controllers
                 mail.Subject = "Yeni Bir Görüş";
                 mail.Body = message.ToString();
                 mail.IsBodyHtml = true;
-               
-                SendMail(mail);                                              
+
+                SendMail(mail);
             }
 
             ModelState.Clear();
@@ -81,8 +117,8 @@ namespace IbrahimSipahi.UI.Controllers
                     smtpClient.UseDefaultCredentials = false;
                     NetworkCredential cred = new NetworkCredential("info@ibrahimsipahi.com", "4XuRF3K1");
                     cred.Domain = "info@ibrahimsipahi.com";
-                    smtpClient.Credentials = cred; 
-                                         
+                    smtpClient.Credentials = cred;
+
                     smtpClient.Send(mail);
                     ViewBag.Mail = "Mail gönderildi";
                 }

@@ -2,7 +2,9 @@
 using IbrahimSipahi.UI.Models;
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
+using System.Text;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -10,10 +12,7 @@ namespace PersonelMVCUI.Controllers
 {
     public class SecurityController : Controller
     {
-        sipahiibEntities sipahiibEntity = new sipahiibEntities();
-
         //[AllowAnonymous] //global.asax dosyasına "GlobalFilters" satırı eklendi.
-        [HttpGet]
         public ActionResult Login()
         {
             return View();
@@ -27,6 +26,8 @@ namespace PersonelMVCUI.Controllers
             Session["kullanici"] = null;
             if (ModelState.IsValid)
             {
+                sipahiibEntities sipahiibEntity = new sipahiibEntities();
+
                 var firstLogin = sipahiibEntity.Users.FirstOrDefault(m => m.Email == kullanici.Email);
                 String[] parts = kullanici.Email.Split(new[] { '@' });
 
@@ -34,8 +35,8 @@ namespace PersonelMVCUI.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(kullanici.Email, false);
 
-                    kullanici.OnaySifre = kullanici.Sifre;                    
-                    Session["kullanici"] = parts[0];                    
+                    kullanici.OnaySifre = kullanici.Sifre;
+                    Session["kullanici"] = parts[0];
 
                     sipahiibEntity.Users.Add(kullanici);
                     sipahiibEntity.SaveChanges();
@@ -53,7 +54,7 @@ namespace PersonelMVCUI.Controllers
                     ViewBag.Invalid = "Geçersiz kullanıcı adı veya şifre";
                     return View();
                 }
-                                
+
                 return RedirectToAction("Index", "Home");
             }
 
@@ -66,5 +67,93 @@ namespace PersonelMVCUI.Controllers
             Session["kullanici"] = null;
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult PasswordRemember()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PasswordRemember(Users e)
+        {
+            if (e.Email == null)
+            {
+                ViewBag.Remember = "Email girmeniz gerekmektedir";
+            }
+            else
+            {
+                sipahiibEntities sipahiibEntity = new sipahiibEntities();
+
+                var existingEmail = sipahiibEntity.Users.FirstOrDefault(m => m.Email == e.Email);
+                if (existingEmail != null && existingEmail.Email == e.Email)
+                {
+                    StringBuilder message = new StringBuilder();
+                    string fromAdd = "info@ibrahimsipahi.com";
+
+                    MailAddress from = new MailAddress(fromAdd);
+                    message.AppendLine("Şifreniz: " + existingEmail.Sifre);
+
+                    MailMessage mail = new MailMessage();
+
+                    mail.From = from;
+                    mail.To.Add(existingEmail.Email.ToString());
+                    mail.Subject = "Kayıtlı Şifreniz";
+                    mail.Body = message.ToString();
+                    mail.IsBodyHtml = true;
+
+                    SendMail(mail);
+                }
+            }
+            ModelState.Clear();
+            return View();
+        }
+
+        private void SendMail(MailMessage mail)
+        {
+            try
+            {
+                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", 587))
+                {
+                    smtpClient.EnableSsl = false;
+                    smtpClient.UseDefaultCredentials = false;
+                    NetworkCredential cred = new NetworkCredential("info@ibrahimsipahi.com", "4XuRF3K1");
+                    cred.Domain = "info@ibrahimsipahi.com";
+                    smtpClient.Credentials = cred;
+
+                    smtpClient.Send(mail);
+                    ViewBag.Remember = "Şifreniz mail adresinize gönderilmiştir";
+                }
+            }
+            catch (SmtpFailedRecipientsException ex)
+            {
+                foreach (SmtpFailedRecipientException t in ex.InnerExceptions)
+                {
+                    var status = t.StatusCode;
+                    if (status == SmtpStatusCode.MailboxBusy ||
+                        status == SmtpStatusCode.MailboxUnavailable)
+                    {
+                        Response.Write("Delivery failed - retrying in 5 seconds.");
+                        System.Threading.Thread.Sleep(5000);
+                    }
+                    else
+                    {
+                        ViewBag.Remember = "Şifreniz gönderilemedi!";
+                        Response.Write("Failed to deliver message ");
+                    }
+                }
+            }
+            catch (SmtpException Se)
+            {
+                ViewBag.Remember = "Şifreniz gönderilemedi!";
+                Response.Write(Se.ToString());
+            }
+
+            catch (Exception ex)
+            {
+                ViewBag.Remember = "Şifreniz gönderilemedi!";
+                Response.Write(ex.ToString());
+            }
+        }
+
     }
 }
