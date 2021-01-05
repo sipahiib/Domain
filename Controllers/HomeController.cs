@@ -90,7 +90,7 @@ namespace IbrahimSipahi.UI.Controllers
         {
             try
             {
-                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", 587))
+                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", port))
                 {
                     smtpClient.EnableSsl = false;
                     smtpClient.UseDefaultCredentials = false;
