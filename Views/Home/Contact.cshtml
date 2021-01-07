@@ -6,15 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<head>
-    <link rel="shortcut icon" href="~/fonts/com.png" type="image/x-icon" />
-</head>
-
 
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-@*<link href="~/Content/css.css" rel="stylesheet" />*@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 
+@*<div class="text-center">
+    <h5> @ViewBag.Title</h5>
+</div>*@
 
 @using (Html.BeginForm("Contact", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "contact-form", role = "form" }))
 {
