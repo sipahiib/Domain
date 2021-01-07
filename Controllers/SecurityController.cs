@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -88,20 +89,23 @@ namespace PersonelMVCUI.Controllers
                 if (existingEmail != null && existingEmail.Email == e.Email)
                 {
                     StringBuilder message = new StringBuilder();
-                    string fromAdd = "info@ibrahimsipahi.com";
+                    MailAddress fromAdd = new MailAddress("info@ibrahimsipahi.com");
 
-                    MailAddress from = new MailAddress(fromAdd);
                     message.AppendLine("Şifreniz: " + existingEmail.Sifre);
 
                     MailMessage mail = new MailMessage();
 
-                    mail.From = from;
+                    mail.From = fromAdd;
                     mail.To.Add(existingEmail.Email.ToString());
                     mail.Subject = "Kayıtlı Şifreniz";
                     mail.Body = message.ToString();
                     mail.IsBodyHtml = true;
 
                     SendMail(mail);
+                }
+                else
+                {
+                    ViewBag.Remember = "Kayıtlı olmayan bir email girdiniz";
                 }
             }
             ModelState.Clear();
@@ -110,14 +114,16 @@ namespace PersonelMVCUI.Controllers
 
         private void SendMail(MailMessage mail)
         {
-            try
+            try                
             {
-                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", port))
+                string password = WebConfigurationManager.AppSettings["MailPassword"];
+
+                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", 587))
                 {
                     smtpClient.EnableSsl = false;
                     smtpClient.UseDefaultCredentials = false;
-                    NetworkCredential cred = new NetworkCredential("username", "pass");
-                    cred.Domain = "info@ibrahimsipahi.com";
+                    NetworkCredential cred = new NetworkCredential("info@ibrahimsipahi.com", password);
+                    cred.Domain = "ibrahimsipahi.com";
                     smtpClient.Credentials = cred;
 
                     smtpClient.Send(mail);

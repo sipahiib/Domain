@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 
@@ -16,6 +17,27 @@ namespace IbrahimSipahi.UI.Controllers
     {
         public ActionResult Index()
         {
+            //if (Session["login"] == null)
+            //{
+            //    string userIP = Request.ServerVariables["HTTP_CLIENT_IP"] == null ? Request.UserHostAddress : Request.ServerVariables["HTTP_CLIENT_IP"];                
+
+            //    sipahiibEntities sipahiibEntity = new sipahiibEntities();
+
+            //    //if (!(sipahiibEntity.IPAddress.ToList().Where(x => x.IPAddress1 == userIP).Select(y => y.IPAddress1).Any()))
+            //    //{
+            //    //    ViewBag.Mesaj = "İlk kez bu siteye giriş yapıyorsun. Teşekkürler!";
+            //    //}
+            //    //else
+            //    //{
+            //    //    ViewBag.Mesaj = "Tekrar hoşgeldin!";
+            //    //}
+
+            //    Session["login"] = 1;
+
+            //    sipahiibEntity.IPAddress.Add(new Models.IPAddress { IPAddress1 = userIP, CreateDate = DateTime.Now });
+            //    sipahiibEntity.SaveChanges();
+            //}
+
             var followups = new List<Followups>()
             {
                 new Followups() { Name= "Tim Corey", Link="https://www.youtube.com/user/IAmTimCorey"} ,
@@ -90,12 +112,14 @@ namespace IbrahimSipahi.UI.Controllers
         {
             try
             {
-                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", port))
+                string password = WebConfigurationManager.AppSettings["MailPassword"];
+
+                using (var smtpClient = new SmtpClient("smtp.ibrahimsipahi.com", 587))
                 {
                     smtpClient.EnableSsl = false;
                     smtpClient.UseDefaultCredentials = false;
-                    NetworkCredential cred = new NetworkCredential("username", "pass");
-                    cred.Domain = "info@ibrahimsipahi.com";
+                    NetworkCredential cred = new NetworkCredential("info@ibrahimsipahi.com", password);
+                    cred.Domain = "ibrahimsipahi.com";
                     smtpClient.Credentials = cred;
 
                     smtpClient.Send(mail);
